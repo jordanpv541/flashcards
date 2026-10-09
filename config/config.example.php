@@ -6,9 +6,8 @@ return [
     // Dirección pública de la web, sin barra al final.
     'app_url' => 'https://flashcards.jmpvlab.com',
 
-    // Clave secreta larga y aleatoria. Genera una con:
-    //   php -r "echo bin2hex(random_bytes(32)), PHP_EOL;"
-    'app_secret' => 'CAMBIA-ESTO-POR-64-CARACTERES-ALEATORIOS',
+    // Déjalo vacío: la web crea una clave secreta la primera vez y la guarda en storage/app_secret.key.
+    'app_secret' => '',
 
     // Muestra errores en pantalla. Déjalo en false en SiteGround.
     'debug' => false,

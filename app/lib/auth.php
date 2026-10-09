@@ -182,7 +182,7 @@ function user_find_or_create_by_email(string $email, string $name = ''): array
 
 function code_hash(string $email, string $code): string
 {
-    return hash_hmac('sha256', $email . '|' . $code, (string) config('app_secret'));
+    return hash_hmac('sha256', $email . '|' . $code, app_secret());
 }
 
 function code_create(string $email): string

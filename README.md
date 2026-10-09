@@ -60,13 +60,13 @@ www/flashcards.jmpvlab.com/
 
 Si por algún motivo todo queda dentro de `public_html/`, igual funciona: `.htaccess` bloquea `app/`, `config/` y `storage/`.
 
-`storage/logs` y `storage/imports` deben poder escribirse (permisos 755 o 775).
+`storage/`, `storage/logs` y `storage/imports` deben poder escribirse (permisos 755 o 775).
 
 ### 4. Configuración
 
 Copia `config/config.example.php` como `config/config.php` y completa:
 
-- `app_secret`: 64 caracteres aleatorios. Puedes generarlos en https://flashcards.jmpvlab.com después, o en tu PC con `php -r "echo bin2hex(random_bytes(32));"`.
+- `app_secret`: déjalo vacío. La web crea su clave secreta la primera vez y la guarda en `storage/app_secret.key`.
 - `db`: nombre, usuario y clave del paso 2.
 - `mail`: un buzón del dominio (Site Tools → Correo → Cuentas), por ejemplo `no-responder@jmpvlab.com`. Usa los datos SMTP que muestra SiteGround en "Configuración de correo" (normalmente puerto 465 con SSL).
 - `google`: ver el paso 5.

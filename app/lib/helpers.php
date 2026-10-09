@@ -14,6 +14,35 @@ function config(string $key, mixed $default = null): mixed
     return $value;
 }
 
+/**
+ * Clave secreta de la web. Si config.php no trae una, se crea una sola vez
+ * y se guarda en storage/app_secret.key (fuera de la web y fuera de GitHub).
+ */
+function app_secret(): string
+{
+    static $secret = null;
+    if ($secret !== null) {
+        return $secret;
+    }
+    $fromConfig = (string) config('app_secret', '');
+    if (strlen($fromConfig) >= 32 && !str_starts_with($fromConfig, 'CAMBIA')) {
+        return $secret = $fromConfig;
+    }
+    $file = APP_ROOT . '/storage/app_secret.key';
+    if (is_file($file)) {
+        $saved = trim((string) file_get_contents($file));
+        if (strlen($saved) >= 64) {
+            return $secret = $saved;
+        }
+    }
+    $secret = bin2hex(random_bytes(32));
+    if (@file_put_contents($file, $secret, LOCK_EX) === false) {
+        throw new RuntimeException('No se pudo guardar storage/app_secret.key: revisa los permisos de storage/.');
+    }
+    @chmod($file, 0600);
+    return $secret;
+}
+
 function limit(string $name): int
 {
     $defaults = [
