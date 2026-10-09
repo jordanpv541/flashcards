@@ -1,0 +1,19 @@
+# Datos privados: nunca subir a GitHub
+/config/config.php
+/storage/*
+!/storage/.htaccess
+!/storage/logs/
+/storage/logs/*
+!/storage/logs/.gitkeep
+!/storage/imports/
+/storage/imports/*
+!/storage/imports/.gitkeep
+
+# Pruebas locales
+/tests/fixtures/
+/tests/tmp/
+/dist/
+
+# Sistema
+.DS_Store
+Thumbs.db
