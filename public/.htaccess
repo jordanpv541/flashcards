@@ -13,7 +13,8 @@ DirectoryIndex index.php
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Nunca servir archivos ocultos ni la carpeta app/ si se subió dentro de public_html
-    RewriteRule (^|/)\. - [F]
+    # (menos .well-known, que usa la renovación del certificado SSL)
+    RewriteRule (^|/)\.(?!well-known/) - [F]
     RewriteRule ^(app|config|storage|sql|tests)(/|$) - [F]
 
     # Quien escriba una dirección con .php va a la versión limpia
